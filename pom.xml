@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -70,15 +71,6 @@
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
         <version>2.0.5</version>
-        <executions>
-          <execution>
-            <id>process</id>
-            <goals>
-              <goal>process-test</goal>
-            </goals>
-            <phase>generate-test-sources</phase>
-          </execution>
-        </executions>
         <configuration>
           <processors>
             <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
@@ -94,16 +86,25 @@
             <version>${querydsl.version}</version>
           </dependency>
         </dependencies>
+        <executions>
+          <execution>
+            <id>process</id>
+            <goals>
+              <goal>process-test</goal>
+            </goals>
+            <phase>generate-test-sources</phase>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
         <executions>
           <execution>
-            <phase>generate-test-sources</phase>
             <goals>
               <goal>add-test-source</goal>
             </goals>
+            <phase>generate-test-sources</phase>
             <configuration>
               <sources>
                 <source>${project.build.directory}/generated-sources/apt-test</source>
